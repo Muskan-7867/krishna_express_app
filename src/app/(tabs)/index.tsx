@@ -29,6 +29,8 @@ export default function IncomingScreen() {
     },
     card: {
       backgroundColor: theme.backgroundElement,
+      borderColor: theme.backgroundSelected,
+
     },
     statusCard: {
       backgroundColor: theme.backgroundSelected,
@@ -39,6 +41,7 @@ export default function IncomingScreen() {
     textSecondary: {
       color: theme.textSecondary,
     },
+
   };
 
   const [facing] = useState<CameraType>("back");
@@ -133,20 +136,33 @@ export default function IncomingScreen() {
         {/* Manual Entry */}
         <Text style={[styles.label, themeStyles.text]}>Enter Serial Number</Text>
 
-        <TextInput
-          style={[styles.input, themeStyles.input]}
-          placeholder="Enter serial number"
-          placeholderTextColor={theme.textSecondary}
-          value={serialNumber}
-          onChangeText={setSerialNumber}
-        />
+        <View
+          style={[
+            styles.searchContainer,
+            {
+              backgroundColor: theme.backgroundElement,
+              borderColor: theme.backgroundSelected,
+            },
+          ]}
+        >
+          <TextInput
+            style={[styles.searchInput, { color: theme.text }]}
+            placeholder="Enter serial number"
+            placeholderTextColor={theme.textSecondary}
+            value={serialNumber}
+            onChangeText={setSerialNumber}
+            onSubmitEditing={handleManualSearch}
+          />
 
-        <View style={styles.buttonRow}>
           <Pressable
-            style={styles.searchBtn}
             onPress={handleManualSearch}
+            style={styles.searchIcon}
           >
-            <Text style={styles.btnText}>Search</Text>
+            <Ionicons
+              name="search"
+              size={22}
+              color={theme.textSecondary}
+            />
           </Pressable>
         </View>
 
@@ -189,117 +205,121 @@ export default function IncomingScreen() {
 
         {/* Shipment Details Form */}
         {shipmentData && (
-          <View style={[styles.card, themeStyles.card]}>
-            <Text style={[styles.title, themeStyles.text]}>Shipment Details</Text>
+          <>
+            <View style={[styles.card, themeStyles.card]}>
+              <Text style={[styles.title, themeStyles.text]}>Shipment Details</Text>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Tracking ID</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.trackingId}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, trackingId: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Tracking ID</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.trackingId}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, trackingId: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Source</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.source}
-                multiline
-                onChangeText={(text) =>
-                  setFormData({ ...formData, source: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Source</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.source}
+                  multiline
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, source: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Destination</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.destination}
-                multiline
-                onChangeText={(text) =>
-                  setFormData({ ...formData, destination: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Destination</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.destination}
+                  multiline
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, destination: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Sender</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.sender}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, sender: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Sender</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.sender}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, sender: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Sender Mobile</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.senderMobile}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, senderMobile: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Sender Mobile</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.senderMobile}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, senderMobile: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Receiver</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.receiver}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, receiver: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Receiver</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.receiver}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, receiver: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Receiver Mobile</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.receiverMobile}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, receiverMobile: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Receiver Mobile</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.receiverMobile}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, receiverMobile: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Created At</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.createdAt}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, createdAt: text })
-                }
-              />
-            </View>
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Created At</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.createdAt}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, createdAt: text })
+                  }
+                />
+              </View>
 
-            <View style={styles.field}>
-              <Text style={[styles.fieldLabel, themeStyles.text]}>Updated At</Text>
-              <TextInput
-                style={[styles.inputField, themeStyles.input]}
-                placeholderTextColor={theme.textSecondary}
-                value={formData.updatedAt}
-                onChangeText={(text) =>
-                  setFormData({ ...formData, updatedAt: text })
-                }
-              />
+              <View style={styles.field}>
+                <Text style={[styles.fieldLabel, themeStyles.text]}>Updated At</Text>
+                <TextInput
+                  style={[styles.inputField, themeStyles.input]}
+                  placeholderTextColor={theme.textSecondary}
+                  value={formData.updatedAt}
+                  onChangeText={(text) =>
+                    setFormData({ ...formData, updatedAt: text })
+                  }
+                />
+              </View>
+
+
             </View>
 
             <Text style={[styles.statusHeading, themeStyles.text]}>
@@ -308,7 +328,17 @@ export default function IncomingScreen() {
 
             {shipmentData.statuses?.map(
               (status: any, index: number) => (
-                <View key={index} style={[styles.statusCard]}>
+                <View
+                  key={index}
+                  style={[
+                    styles.statusCard,
+                    themeStyles.statusCard,
+                    {
+                      backgroundColor: theme.backgroundElement,
+                      borderColor: theme.backgroundSelected,
+                    },
+                  ]}
+                >
                   <Text style={[styles.statusText, themeStyles.text]}>
                     Status: {status.status}
                   </Text>
@@ -333,18 +363,20 @@ export default function IncomingScreen() {
                 </View>
               )
             )}
-          </View>
+            </>
         )}
-      </ScrollView>
+          </ScrollView>
 
-      {!isCameraOpen && (
-        <Pressable
-          style={styles.fab}
-          onPress={openCamera}
-        >
-          <Ionicons name="camera" size={28} color="#fff" />
-        </Pressable>
-      )}
+        {!isCameraOpen && (
+          <Pressable
+            style={styles.fab}
+            onPress={openCamera}
+          >
+            <Ionicons name="camera" size={28} color="#fff" />
+          </Pressable>
+        )}
+
+
     </ThemedView>
   );
 }
@@ -384,7 +416,7 @@ const styles = StyleSheet.create({
   searchBtn: {
     flex: 1,
     height: 50,
-    backgroundColor: "#2563eb",
+    backgroundColor: "#f76b2e",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -402,7 +434,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#16a34a",
+    backgroundColor: "#f76b2e",
     justifyContent: "center",
     alignItems: "center",
 
@@ -481,13 +513,10 @@ const styles = StyleSheet.create({
   },
 
   statusCard: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#d1d5db",
-
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 12,
+    borderWidth: 1,
   },
 
   statusText: {
@@ -504,5 +533,27 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "700",
     marginBottom: 6,
+  },
+
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: 52,
+    paddingLeft: 12,
+  },
+
+  searchInput: {
+    flex: 1,
+    height: "100%",
+    fontSize: 15,
+  },
+
+  searchIcon: {
+    width: 50,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

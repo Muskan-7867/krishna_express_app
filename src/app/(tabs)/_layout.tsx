@@ -14,15 +14,16 @@ export default function TabsLayout() {
       labelStyle={{ selected: { color: colors.text } }}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Incoming</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
+        <NativeTabs.Trigger.Icon selectedColor={"#f76b2e"}     
           src={require('@/assets/images/tabIcons/home.png')}
           renderingMode="template"
+          
         />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="outgoing">
         <NativeTabs.Trigger.Label>Outgoing</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
+        <NativeTabs.Trigger.Icon selectedColor={"#f76b2e"} 
           src={require('@/assets/images/tabIcons/explore.png')}
           renderingMode="template"
         />
@@ -30,7 +31,7 @@ export default function TabsLayout() {
 
       <NativeTabs.Trigger name="clients">
         <NativeTabs.Trigger.Label>Clients</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
+        <NativeTabs.Trigger.Icon selectedColor={"#f76b2e"} 
           src={require('@/assets/images/tabIcons/home.png')}
           renderingMode="template"
         />
